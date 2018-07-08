@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SignalRDbModelStoreContainer" CdmEntityContainer="SignalRDbEntities">
+    <EntitySetMapping Name="Trajet">
+      <EntityTypeMapping TypeName="SignalRDbModel.Trajet">
+        <MappingFragment StoreEntitySet="Trajet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NumeroTrain" ColumnName="NumeroTrain" />
+          <ScalarProperty Name="GareDepart" ColumnName="GareDepart" />
+          <ScalarProperty Name="GareArrivee" ColumnName="GareArrivee" />
+          <ScalarProperty Name="DateHeureDepart" ColumnName="DateHeureDepart" />
+          <ScalarProperty Name="DateHeureArrivee" ColumnName="DateHeureArrivee" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

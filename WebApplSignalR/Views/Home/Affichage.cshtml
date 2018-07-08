@@ -1,0 +1,72 @@
+﻿@model IList<WebApplSignalR.Models.TrajetVM>
+@{
+    ViewBag.Title = "Affichage";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Affichage</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>NumeroTrain</th>
+                    <th>GareDepart</th>
+                    <th>GareArrivee</th>
+                    <th>DateHeureDepart</th>
+                    <th>DateHeureArrivee</th>
+                    <th>UpdatedAt</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+
+                        <tr id="@item.Id">
+                            <td>@item.Id</td>
+                            <td>@item.NumeroTrain</td>
+                            <td>@item.GareDepart</td>
+                            <td>@item.GareArrivee</td>
+                            <td id='depart@(item.Id)'>@item.DateHeureDepart</td>
+                            <td id='arrivee@(item.Id)'>@item.DateHeureArrivee</td>
+                            <td id='updateAt@(item.Id)'>@item.UpdatedAt</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="/signalr/hubs"></script>
+    <script type="text/javascript">
+        function displayData(id, name, data) {
+            var target = $(name + id);
+            target.html(data);
+            target.hide(300);
+            target.show(300);
+            target.css("color", "#31B404");
+        }
+
+        $(function () {
+
+            // Create a proxy to signalr hub on web server. It reference the hub.
+            var notificationFromHub = $.connection.trajetHub;
+
+            // Connect to signalr hub
+            $.connection.hub.start();
+
+            // Notify to client with the recent updates
+            notificationFromHub.client.updatedClients = function (data) {
+                displayData(data.Id, "#updateAt", data.UpdateAt);
+                displayData(data.Id, "#depart", data.Depart);
+                displayData(data.Id, "#arrivee", data.Arrivee);
+            };
+
+        });
+
+    </script>
+}

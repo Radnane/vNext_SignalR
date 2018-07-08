@@ -1,0 +1,44 @@
+﻿@model IList<WebApplSignalR.Models.TrajetVM>
+@{
+    ViewBag.Title = "Administration";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Administration</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>NumeroTrain</th>
+                    <th>GareDepart</th>
+                    <th>GareArrivee</th>
+                    <th>DateHeureDepart</th>
+                    <th>DateHeureArrivee</th>
+                    <th>UpdatedAt</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+
+                        <tr id="@item.Id">
+                            <td>@item.Id</td>
+                            <td>@item.NumeroTrain</td>
+                            <td>@item.GareDepart</td>
+                            <td>@item.GareArrivee</td>
+                            <td>@item.DateHeureDepart</td>
+                            <td>@item.DateHeureArrivee</td>
+                            <td id='updateAt@(item.Id)'>@item.UpdatedAt</td>
+                            <td> <a href="@Url.Action("GetTrajet", "Home", new { id = item.Id })">Update</a> </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
